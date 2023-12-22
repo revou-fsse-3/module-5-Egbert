@@ -29,5 +29,6 @@ export default {
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
-[Netlify](teal-toffee-b74a94.netlify.app)
+[Netlify](https://peppy-dusk-823518.netlify.app/)
+
 [Vercel](https://module-4-egbert-pied.vercel.app/)
