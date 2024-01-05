@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import PersonalInformation from './Component/PersonalInformation';
@@ -50,7 +50,6 @@ const MultiStepForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values: any) => {
-          // Handle form submission
           console.log(values);
         }}
       >
