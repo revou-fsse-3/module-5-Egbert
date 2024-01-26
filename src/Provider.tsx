@@ -11,7 +11,6 @@ type Props =  {
     children: ReactNode
 }
 
-
 export const AppContext = createContext<ContextType>(null);
 
 export const Provider = ({ children } : Props) => {

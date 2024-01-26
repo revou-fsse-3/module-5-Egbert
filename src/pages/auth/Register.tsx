@@ -21,7 +21,7 @@ const schema = yup
     })
     .required();
 
-const Register: React.FC = () => {
+const Register = () => {
     const navigate = useNavigate();
 
     const context = useContext<ContextType>(AppContext);
@@ -32,7 +32,7 @@ const Register: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
-    } = useForm<FormProps>({
+    } = useForm({
     resolver: yupResolver(schema),
     });
 
@@ -76,6 +76,7 @@ const Register: React.FC = () => {
             control={control}
             render={({ field }) => (
                 <TextField
+                placeholder="name"
                 value={field.value}
                 onChange={field.onChange}
                 label="Name"
@@ -94,6 +95,7 @@ const Register: React.FC = () => {
             control={control}
             render={({ field }) => (
                 <TextField
+                placeholder="email"
                 value={field.value}
                 onChange={field.onChange}
                 label="Email"
@@ -113,6 +115,7 @@ const Register: React.FC = () => {
             render={({ field }) => (
                 <TextField
                 type="password"
+                placeholder="password"
                 value={field.value}
                 onChange={field.onChange}
                 label="Password"

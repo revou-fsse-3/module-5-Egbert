@@ -9,7 +9,7 @@ interface Category {
     is_active: boolean;
 }
 
-const List: React.FC = () => {
+const List = () => {
     const navigate = useNavigate();
     const [rows, setRows] = useState<Category[]>([]);
 

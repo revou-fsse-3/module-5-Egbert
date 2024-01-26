@@ -12,10 +12,6 @@ email?: string;
 password?: string;
 }
 
-interface ErrorResponse {
-errors?: string | string[];
-}
-
 const schema = yup
 .object({
     email: yup.string().email().required(),
@@ -23,7 +19,7 @@ const schema = yup
 })
 .required();
 
-const Login: React.FC = () => {
+const Login = () => {
 const context = useContext<ContextType>(AppContext);
 const setOpen = context?.setOpen;
 const setMessage = context?.setMessage;
@@ -32,7 +28,7 @@ const {
     handleSubmit,
     control,
     formState: { errors },
-} = useForm<FormProps>({
+} = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
         email: undefined,
@@ -45,10 +41,9 @@ const handleError = (message: string) => {
     setMessage?.(message);
 };
 
-const onSubmit = async (data: FormProps) => {
+const submit = async (data: FormProps) => {
     try {
-    const response = await axios.post<ErrorResponse>(
-        "https://mock-api.arikmpt.com/api/user/login",
+    const response = await axios.post( "https://mock-api.arikmpt.com/api/user/login",
         {
             email: data.email,
             password: data.password,
@@ -58,15 +53,14 @@ const onSubmit = async (data: FormProps) => {
     window.localStorage.setItem("token", response.data.data.token);
     navigate("/");
     } catch (error) {
-        const err = error as AxiosError<ErrorResponse>;
-        const responseErrors = err.response?.data?.errors;
+        const err = error as AxiosError as any;
+        const responseErrors = err.response?.data?.errors!;
         if (Array.isArray(responseErrors)) {
             return;
         }
         handleError(responseErrors);
     }
 };
-
 const navigate = useNavigate();
 
 const handleRegister = () => {
@@ -85,6 +79,7 @@ return (
             control={control}
             render={({ field }) => (
                 <TextField
+                placeholder="email"
                 value={field.value}
                 onChange={field.onChange}
                 label="Email"
@@ -104,6 +99,7 @@ return (
             render={({ field }) => (
                 <TextField
                 type="password"
+                placeholder="password"
                 value={field.value}
                 onChange={field.onChange}
                 label="Password"
@@ -119,7 +115,7 @@ return (
         <Button
             variant="contained"
             fullWidth
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(submit)}
         >
         Login
         </Button>

@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import { AppContext, ContextType } from "../../Provider";
 import { useContext } from "react";
 
+
 interface FormProps {
     name?: string;
     is_active?: boolean;
@@ -19,7 +20,7 @@ const schema = yup
     })
     .required();
 
-const Add: React.FC = () => {
+const Add = () => {
     const navigate = useNavigate();
     const context = useContext<ContextType>(AppContext);
     const setOpen = context?.setOpen;
@@ -29,7 +30,7 @@ const Add: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
-    } = useForm<FormProps>({
+    } = useForm({
     resolver: yupResolver(schema),
     });
 
@@ -75,6 +76,7 @@ const Add: React.FC = () => {
             control={control}
             render={({ field }) => (
                 <TextField
+                placeholder="name"
                 value={field.value}
                 onChange={field.onChange}
                 label="Name"
@@ -102,8 +104,8 @@ const Add: React.FC = () => {
                 size="small"
                 className="mt-1 p-2 w-full border rounded-md"
                 >
-                <MenuItem value={true}>Active</MenuItem>
-                <MenuItem value={false}>Deactive</MenuItem>
+                <MenuItem value={'1'}>Active</MenuItem>
+                <MenuItem value={'0'}>Deactive</MenuItem>
                 </Select>
             )}
             />

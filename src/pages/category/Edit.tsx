@@ -21,21 +21,21 @@ const schema = yup
     })
     .required();
 
-const Edit: React.FC = () => {
+const Edit = () => {
     const navigate = useNavigate();
     const context = useContext<ContextType>(AppContext);
     const setOpen = context?.setOpen;
     const setMessage = context?.setMessage;
 
-    const { id } = useParams();
+    const { id } = useParams()
     const {
-    handleSubmit,
-    control,
-    formState: { errors },
-    reset,
-    } = useForm<FormProps>({
-    resolver: yupResolver(schema),
-    });
+        handleSubmit,
+        control,
+        formState: { errors },
+        reset
+    } = useForm({
+        resolver: yupResolver(schema)
+    })
 
     const handleError = (message: string) => {
     setOpen?.(true);
@@ -84,7 +84,7 @@ const Edit: React.FC = () => {
         },
         {
             headers: {
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
             },
         }
         );
@@ -140,8 +140,8 @@ const Edit: React.FC = () => {
                 size="small"
                 className="mt-1 p-2 w-full border rounded-md"
                 >
-                <MenuItem value={true}>Active</MenuItem>
-                <MenuItem value={false}>Deactive</MenuItem>
+                <MenuItem value={"1"}>Active</MenuItem>
+                <MenuItem value={"0"}>Deactive</MenuItem>
                 </Select>
             )}
             />
