@@ -8,7 +8,7 @@ export type ContextType = {
 } | null
 
 type Props =  {
-    children: ReactNode
+    children?: ReactNode
 }
 
 export const AppContext = createContext<ContextType>(null);
